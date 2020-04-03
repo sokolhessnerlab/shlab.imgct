@@ -1,0 +1,23 @@
+Package: shlab.imgct
+Title: Sokol-Hessner Lab image categorization task for R.
+Version: 0.1.0
+Authors@R: as.person(c( 
+		"Ari Dyckovsky <ari.dyckovsky@du.edu> [aut, cre]",
+		"Peter Sokol-Hessneer <peter.sokol-hessner@du.edu> [aut]"
+	))
+Description: Written for use in an image categorization task at the Sokol-Hessner Lab at University of Denver.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: 
+    readr,
+    tidyr,
+    ggplot2,
+    purrr,
+    tibble,
+    dplyr,
+    stringr,
+    forcats,
+    janitor,
+    shlab.utils
