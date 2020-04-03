@@ -2,12 +2,14 @@
 #'
 #' \code{load_txt_key} reads a list of key=value pairs in a txt file.
 #'
-#' @param path must be a relative path to the project root directory 
-#' @param key_type can equal "category" or "validation"
-#'
-#' @return 
+#' @param path String path to file, which must be a relative path to the project root directory 
+#' @param key_template String literal that can equal "CATEGORY" or "VALIDATION".
+#' @param col_names Vector of column names for txt key.
+#' 
+#' @return A transposed key.
 #'
 #' @examples
+#' load_txt_key("./keys/validation_key.txt", key_template = "VALIDATION")
 #'
 #' @export
 load_txt_key <- function(path, 
