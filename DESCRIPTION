@@ -5,7 +5,7 @@ Authors@R: as.person(c(
 		"Ari Dyckovsky <ari.dyckovsky@du.edu> [aut, cre]",
 		"Peter Sokol-Hessneer <peter.sokol-hessner@du.edu> [aut]"
 	))
-Description: Written for use in an image categorization task at the Sokol-Hessner Lab at University of Denver.
+Description: Package of data pipeline methods written for use in an image categorization task at the Sokol-Hessner Lab at University of Denver.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
