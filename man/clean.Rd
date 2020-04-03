@@ -4,7 +4,7 @@
 \alias{clean}
 \title{Clean Function}
 \usage{
-clean(x)
+clean(path)
 }
 \arguments{
 \item{x}{The variable x is something to be clean.}
