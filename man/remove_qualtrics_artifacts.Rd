@@ -6,6 +6,15 @@
 \usage{
 remove_qualtrics_artifacts(block, block_id)
 }
+\arguments{
+\item{block_id}{}
+}
+\value{
+Return block as dataframe without qualtrics artifacts.
+}
 \description{
-Remove Qualtrics artifacts from a
+\code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
+}
+\examples{
+
 }

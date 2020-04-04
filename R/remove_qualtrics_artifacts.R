@@ -1,19 +1,25 @@
 #' Remove Qualtrics artifacts from a 
 #' 
+#' \code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
 #'
+#' @param block
+#' @param block_id
 #'
+#' @return Return block as dataframe without qualtrics artifacts.
 #'
-
-# TODO finish this function
-
-# function remove_qualtrics_artifacts(block, block_id)
+#' @examples
+#'
+#' @export
 remove_qualtrics_artifacts <- function(block, block_id) {
 
-  .rows <- -c(1, 3) # to remove first and third rows
-  .cols <- c( # only keep columns relevant to analysis
-    grep(IP_TAG, block), 
-    grep(QUALTRICS_EXPORT_TAG, block), 
-    grep(IMAGE_BLOCK_TAG, block)
+  library("dplyr")
+  library("plyr")
+
+  .rows <- -c(1, 3)
+  .cols <- c(
+    grep("IP Address", block), # IP Address tag find
+    grep("Q", block), # question tag find
+    grep("imageBlock", block) # temporary...
   )
 
   block <- block[
@@ -21,7 +27,7 @@ remove_qualtrics_artifacts <- function(block, block_id) {
     .cols
   ]
   
-  # remove extension and appended characters in column names
+  # remove file name extension from image names and appended characters in columns
   block[1, ] <- lapply(block[1, ], sub_qualtrics_image_string)
   
   # drop automated column indices and set colnames
@@ -29,19 +35,17 @@ remove_qualtrics_artifacts <- function(block, block_id) {
   colnames(block) <- block[1, ]
   block <- block[-1, ]
   
-  # filter for block_id (i.e., "02") in imageBlock
+  # filter for block_id (i.e., "02") in imageBlock, again temporary
   block <- dplyr::filter(block, imageBlock == block_id)
 
   # rename `IP Address` for access convenience
-  block <- plyr::rename(block, replace = c(IP_NAME = IP_RENAME))
+  block <- plyr::rename(block, replace = c("IP Address" = "ip_address"))
 
   return(block)
   
 }
 
-# TODO make private
-
-# function sub_qualtrics_image_string(str)
+#' Scrub qualtrics image string at end of name
 sub_qualtrics_image_string <- function(str) {
   .pattern <- sprintf(".jpg - \\d+%s", QUALTRICS_EXPORT_TAG)
   .replacement <- ""
