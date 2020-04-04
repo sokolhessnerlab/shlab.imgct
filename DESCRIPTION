@@ -6,6 +6,8 @@ Authors@R: as.person(c(
 		"Peter Sokol-Hessneer <peter.sokol-hessner@du.edu> [aut]"
 	))
 Description: Package of data pipeline methods written for use in an image categorization task at the Sokol-Hessner Lab at University of Denver.
+URL: https://github.com/sokolhessnerlab/shlab.imgct
+BugReports: https://github.com/sokolhessnerlab/shlab.imgct/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
