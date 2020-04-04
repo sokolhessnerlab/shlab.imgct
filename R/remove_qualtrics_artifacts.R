@@ -2,8 +2,8 @@
 #' 
 #' \code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
 #'
-#' @param block
-#' @param block_id
+#' @param block A dataframe of a block of loaded raw data from qualtrics.
+#' @param block_id The number identifier of the image block used.
 #'
 #' @return Return block as dataframe without qualtrics artifacts.
 #'
