@@ -1,21 +1,15 @@
 # validate.R
 
 # -----------------------------------------------------------------------------
-# IMPORTS
-# -----------------------------------------------------------------------------
-
-library("tidyverse")
-
-# -----------------------------------------------------------------------------
 # CONSTANTS
 # -----------------------------------------------------------------------------
 
 VALIDATION_KEY_FILE = "validation_key.txt"
 VALIDATION_KEY_DELIM = "="
 VALIDATION_KEY_COL_NAMES = c("key", "value")
-VALIDATION_KEY_COL_TYPES = readr::cols(.default = col_character())
+VALIDATION_KEY_COL_TYPES = readr::cols(.default = readr::col_character())
 
-CLEAN_BLOCKS_COL_TYPES = readr::cols(.default = col_character())
+CLEAN_BLOCKS_COL_TYPES = readr::cols(.default = readr::col_character())
 
 CLEAN_BLOCKS_DIR_NAME = "clean"
 KEYS_DIR_NAME = "keys"

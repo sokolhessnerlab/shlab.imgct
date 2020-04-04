@@ -16,9 +16,6 @@ load_txt_key <- function(path,
                          key_template = c("CATEGORY", "VALIDATION"), 
                          col_names = c("key", "value")) {
   
-  library("readr")
-  library("tidyr")
-
   key_template <- match.arg(key_template)
 
   key_path <- file.path(path)
@@ -27,7 +24,7 @@ load_txt_key <- function(path,
     key_path, 
     "=", 
     col_names = col_names,
-    col_types = readr::cols(.default = col_character()),
+    col_types = readr::cols(.default = readr::col_character()),
   )
   
   key <- do.call(

@@ -14,7 +14,6 @@
 #' @export
 load_block <- function(path, block_template = c("RAW", "CLEAN", "VALID")) {
 
-	library("readr")
 	block_template <- match.arg(block_template)
 
 	if (block_template == "RAW") return(load_raw_block(path))
@@ -41,7 +40,7 @@ load_clean_block <- function(path) {
 	block <- readr::read_tsv(
     path_to_clean_block, 
     col_names = TRUE, 
-    col_types = readr::cols(.default = col_character())
+    col_types = readr::cols(.default = readr::col_character())
   )
 }
 

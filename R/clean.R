@@ -10,7 +10,6 @@
 #'
 #' @export
 clean <- function(path) {
-	library("tidyverse")
 	# TODO
 	print(path)
 }

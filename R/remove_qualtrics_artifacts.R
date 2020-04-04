@@ -12,9 +12,6 @@
 #' @export
 remove_qualtrics_artifacts <- function(block, block_id) {
 
-  library("dplyr")
-  library("plyr")
-
   .rows <- -c(1, 3)
   .cols <- c(
     grep("IP Address", block), # IP Address tag find
