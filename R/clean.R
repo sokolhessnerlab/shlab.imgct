@@ -89,13 +89,6 @@ load_raw_block <- function(path_to_raw_block) {
   return(raw_block)
 }
 
-# function sub_qualtrics_image_string(str)
-sub_qualtrics_image_string <- function(str) {
-  .pattern <- sprintf(".jpg - \\d+%s", QUALTRICS_EXPORT_TAG)
-  .replacement <- ""
-  gsub(.pattern,.replacement, str)
-}
-
 # function remove_qualtrics_artifacts(block, block_id)
 remove_qualtrics_artifacts <- function(block, block_id) {
 
@@ -127,4 +120,11 @@ remove_qualtrics_artifacts <- function(block, block_id) {
 
   return(block)
   
+}
+
+# function sub_qualtrics_image_string(str)
+sub_qualtrics_image_string <- function(str) {
+  .pattern <- sprintf(".jpg - \\d+%s", QUALTRICS_EXPORT_TAG)
+  .replacement <- ""
+  gsub(.pattern,.replacement, str)
 }
