@@ -6,6 +6,9 @@
 \usage{
 load_clean_block(path_to_clean_block)
 }
+\value{
+clean_block
+}
 \description{
 \code{load_clean_block}
 }

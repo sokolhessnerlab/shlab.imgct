@@ -7,7 +7,9 @@
 load_block(path, block_template = c("RAW", "CLEAN", "VALID"))
 }
 \arguments{
-\item{block_template}{}
+\item{path}{String for relative path.}
+
+\item{block_template}{String literal for block template.}
 }
 \value{
 
@@ -16,5 +18,7 @@ load_block(path, block_template = c("RAW", "CLEAN", "VALID"))
 \code{load_block} reads a block into a dataframe.
 }
 \examples{
+load_block("./data/raw/raw_01.tsv", block_template = "RAW")
+load_block("./data/clean/clean_07.tsv", block_template = "CLEAN")
 
 }

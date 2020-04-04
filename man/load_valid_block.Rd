@@ -6,6 +6,9 @@
 \usage{
 load_valid_block(path)
 }
+\value{
+valid_block
+}
 \description{
 \code{load_valid_block}
 }

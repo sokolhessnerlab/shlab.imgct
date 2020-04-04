@@ -2,12 +2,14 @@
 #' 
 #' \code{load_block} reads a block into a dataframe.
 #'
-#' @param path
-#' @param block_template
+#' @param path String for relative path.
+#' @param block_template String literal for block template.
 #' 
 #' @return
 #'
 #' @examples
+#' load_block("./data/raw/raw_01.tsv", block_template = "RAW")
+#' load_block("./data/clean/clean_07.tsv", block_template = "CLEAN")
 #' 
 #' @export
 load_block <- function(path, block_template = c("RAW", "CLEAN", "VALID")) {
@@ -22,6 +24,7 @@ load_block <- function(path, block_template = c("RAW", "CLEAN", "VALID")) {
 }
 
 #' \code{load_raw_block}
+#' @return raw_block
 load_raw_block <- function(path) {
   raw_block <- read.delim(
     path,
@@ -33,6 +36,7 @@ load_raw_block <- function(path) {
 }
 
 #' \code{load_clean_block}
+#' @return clean_block
 load_clean_block <- function(path) {
 	block <- readr::read_tsv(
     path_to_clean_block, 
@@ -42,6 +46,7 @@ load_clean_block <- function(path) {
 }
 
 #' \code{load_valid_block}
+#' @return valid_block
 load_valid_block <- function(path) {
 	# mirrors functionality?
 	block <- load_clean_block(path)

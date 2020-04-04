@@ -6,6 +6,9 @@
 \usage{
 load_raw_block(path)
 }
+\value{
+raw_block
+}
 \description{
 \code{load_raw_block}
 }
