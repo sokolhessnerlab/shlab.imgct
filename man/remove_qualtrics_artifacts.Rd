@@ -9,7 +9,7 @@ remove_qualtrics_artifacts(block, block_id)
 \arguments{
 \item{block}{A dataframe of a block of loaded raw data from qualtrics.}
 
-\item{block_id}{The number identifier of the image block used.}
+\item{block_id}{The two digit string number identifier of the image block used.}
 }
 \value{
 Return block as dataframe without qualtrics artifacts.

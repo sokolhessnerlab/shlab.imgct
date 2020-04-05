@@ -3,7 +3,7 @@
 #' \code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
 #'
 #' @param block A dataframe of a block of loaded raw data from qualtrics.
-#' @param block_id The number identifier of the image block used.
+#' @param block_id The two digit string number identifier of the image block used.
 #'
 #' @return Return block as dataframe without qualtrics artifacts.
 #'
@@ -14,9 +14,9 @@ remove_qualtrics_artifacts <- function(block, block_id) {
 
   .rows <- -c(1, 3)
   .cols <- c(
-    grep("IP Address", block), # IP Address tag find
-    grep("Q", block), # question tag find
-    grep("imageBlock", block) # temporary...
+    grep("IP Address", block[1, ]), # IP Address tag find
+    grep("Q", block[1, ]), # question tag find
+    grep("imageBlock", block[1, ]) # temporary...
   )
 
   block <- block[
