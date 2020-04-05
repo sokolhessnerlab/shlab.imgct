@@ -14,7 +14,7 @@ remove_qualtrics_artifacts <- function(block, block_id) {
 
   .rows <- -c(1, 3)
   .cols <- c(
-    grep("IP Address", block[1, ]), # IP Address tag find
+    grep("IP Address|IPAddress", block[1, ]), # IP Address tag find, either style
     grep("Q", block[1, ]), # question tag find
     grep("imageBlock", block[1, ]) # temporary...
   )
