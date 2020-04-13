@@ -15,7 +15,7 @@ load_txt_key(
 
 \item{key_template}{String literal that can equal "CATEGORY" or "VALIDATION".}
 
-\item{col_names}{Vector of column names for txt key.}
+\item{col_names}{Vector of column names for txt key. Defaults to c("key", "value").}
 }
 \value{
 A transposed key.

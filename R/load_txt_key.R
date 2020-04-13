@@ -4,7 +4,7 @@
 #'
 #' @param path String path to file, which must be a relative path to the project root directory 
 #' @param key_template String literal that can equal "CATEGORY" or "VALIDATION".
-#' @param col_names Vector of column names for txt key.
+#' @param col_names Vector of column names for txt key. Defaults to c("key", "value").
 #' 
 #' @return A transposed key.
 #'
@@ -16,7 +16,7 @@ load_txt_key <- function(path,
                          key_template = c("CATEGORY", "VALIDATION"), 
                          col_names = c("key", "value")) {
   
-  key_template <- match.arg(key_template)
+  key_template <- match.arg(key_template) # this could be useful later
 
   key_path <- file.path(path)
 

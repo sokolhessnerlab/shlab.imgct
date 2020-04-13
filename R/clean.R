@@ -11,12 +11,6 @@
 #' clean("../mounts/imgct/data/5_category")
 #'
 #' @export
-
-# -----------------------------------------------------------------------------
-# CLEAN
-# -----------------------------------------------------------------------------
-
-# function clean(path)
 clean <- function(path) {
   
   path_raw = file.path(path, "raw")

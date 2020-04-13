@@ -4,7 +4,7 @@
 \alias{load_clean_block}
 \title{\code{load_clean_block}}
 \usage{
-load_clean_block(path_to_clean_block)
+load_clean_block(path)
 }
 \value{
 clean_block
