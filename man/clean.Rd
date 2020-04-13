@@ -7,7 +7,8 @@
 clean(path)
 }
 \arguments{
-\item{x}{The variable x is something to be clean.}
+\item{path}{The path relative to working directory that holds data in
+designated "raw" directory.}
 }
 \description{
 \code{clean} scrubs a sequenctial list of Qualtrics data export files
@@ -15,5 +16,6 @@ detailing participant category responses to images within a directory of
 image blocks.
 }
 \examples{
+clean("../mounts/imgct/data/5_category")
 
 }

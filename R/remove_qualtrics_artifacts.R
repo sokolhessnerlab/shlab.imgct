@@ -3,20 +3,18 @@
 #' \code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
 #'
 #' @param block A dataframe of a block of loaded raw data from qualtrics.
-#' @param block_id The two digit string number identifier of the image block used.
 #'
 #' @return Return block as dataframe without qualtrics artifacts.
 #'
 #' @examples
 #'
 #' @export
-remove_qualtrics_artifacts <- function(block, block_id) {
+remove_qualtrics_artifacts <- function(block) {
 
   .rows <- -c(1, 3)
   .cols <- c(
     grep("IP Address|IPAddress", block[1, ]), # IP Address tag find, either style
-    grep("Q", block[1, ]), # question tag find
-    grep("imageBlock", block[1, ]) # temporary...
+    grep("Q", block[1, ]) # question tag find
   )
 
   block <- block[
@@ -28,12 +26,10 @@ remove_qualtrics_artifacts <- function(block, block_id) {
   block[1, ] <- lapply(block[1, ], sub_qualtrics_image_string)
   
   # drop automated column indices and set colnames
-  rownames(block) <- NULL # reset named row indices
   colnames(block) <- block[1, ]
   block <- block[-1, ]
-  
-  # filter for block_id (i.e., "02") in imageBlock, again temporary
-  block <- dplyr::filter(block, imageBlock == block_id)
+
+  rownames(block) <- NULL # reset named row indices
 
   # rename `IP Address` for access convenience
   block <- plyr::rename(block, replace = c("IP Address" = "ip_address"))

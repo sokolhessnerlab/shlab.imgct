@@ -4,12 +4,10 @@
 \alias{remove_qualtrics_artifacts}
 \title{Remove Qualtrics artifacts from a}
 \usage{
-remove_qualtrics_artifacts(block, block_id)
+remove_qualtrics_artifacts(block)
 }
 \arguments{
 \item{block}{A dataframe of a block of loaded raw data from qualtrics.}
-
-\item{block_id}{The two digit string number identifier of the image block used.}
 }
 \value{
 Return block as dataframe without qualtrics artifacts.

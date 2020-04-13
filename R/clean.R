@@ -4,63 +4,49 @@
 #' detailing participant category responses to images within a directory of
 #' image blocks.
 #'
-#' @param x The variable x is something to be clean.
+#' @param path The path relative to working directory that holds data in
+#' designated "raw" directory.
 #'
 #' @examples
+#' clean("../mounts/imgct/data/5_category")
 #'
 #' @export
+
+# -----------------------------------------------------------------------------
+# CLEAN
+# -----------------------------------------------------------------------------
+
+# function clean(path)
 clean <- function(path) {
-	# TODO
-	print(path)
-}
-
-# -----------------------------------------------------------------------------
-# CONSTANTS
-# -----------------------------------------------------------------------------
-
-QUALTRICS_EXPORT_TAG <- "_Q10"
-IP_TAG <- "IP"
-IP_NAME <- "IP Address"
-IP_RENAME <- "ip_address"
-IMAGE_BLOCK_TAG <- "imageBlock"
-
-RAW_BLOCKS_DIR_NAME = "raw"
-CLEAN_BLOCKS_DIR_NAME = "clean"
-
-# -----------------------------------------------------------------------------
-# CLEAN: BY BLOCK, BY ALL RAW BLOCKS
-# -----------------------------------------------------------------------------
-
-# function clean_raw_block(raw_block, block_id)
-clean_raw_block <- function(raw_block, block_id) {
-  clean_block <- remove_qualtrics_artifacts(raw_block, block_id)
-  return(clean_block)
-}
-
-# function clean_all_raw_blocks(path)
-clean_all_raw_blocks <- function(path) {
   
-  path_to_raw_blocks = file.path(path, RAW_BLOCKS_DIR_NAME)
-  path_to_clean_blocks = file.path(path, CLEAN_BLOCKS_DIR_NAME)
+  path_raw = file.path(path, "raw")
+  path_clean = file.path(path, "clean")
   
   filenames <- list.files(
-    path = path_to_raw_blocks, 
+    path = path_raw, 
     pattern = "*.tsv",
     full.names = FALSE
   )
-  
+
+  .lower <- 0
+  .upper <- 0
   for (fn in filenames) {
+    print(fn)
     
-    path_to_raw_block <- file.path(path_to_raw_blocks, fn)
-    raw_block <- load_raw_block(path_to_raw_block)
-    block_id <- stringr::str_extract(fn, "\\d+") # extract just block number (i.e., "03")
-    
-    clean_block <- clean_raw_block(raw_block, block_id)
+    block <- shlab.imgct::load_block(file.path(path_raw, fn), "RAW")
+    block <- shlab.imgct::remove_qualtrics_artifacts(block)
+
+    # reset lower bound relative to previous upper bound, then
+    # reset upper bound to total rows extracted thus far
+    .lower <- .upper + 1
+    .upper <- nrow(block)
+
+    block <- dplyr::slice(block, .lower:.upper)
     
     write.table(
-      clean_block,
+      block,
       file = file.path(
-        path_to_clean_blocks,
+        path_clean,
         str_replace(fn, RAW_BLOCKS_DIR_NAME, CLEAN_BLOCKS_DIR_NAME)
       ),
       sep = "\t",
