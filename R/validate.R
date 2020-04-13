@@ -78,33 +78,3 @@ validate_all_clean_blocks <- function(path, threshold = VALIDATION_THRESHOLD) {
   }
   
 }
-
-# -----------------------------------------------------------------------------
-# HELPERS
-# -----------------------------------------------------------------------------
-
-# function load_validation_key(path_to_key)
-# TODO: make single key-loading funciton that can also load category key #DRY
-load_validation_key <- function(path_to_keys) {
-  keypath <- file.path(path_to_keys, VALIDATION_KEY_FILE)
-  raw_key <- readr::read_delim(keypath, 
-                               VALIDATION_KEY_DELIM, 
-                               col_names = VALIDATION_KEY_COL_NAMES,
-                               col_types = VALIDATION_KEY_COL_TYPES
-                              )
-  key <- do.call(
-    tidyr::spread, 
-    list(raw_key, VALIDATION_KEY_COL_NAMES[1], VALIDATION_KEY_COL_NAMES[2])
-  )
-  return(key)
-}
-
-# function load_clean_block(path_to_clean_block)
-load_clean_block <- function(path_to_clean_block) {
-  clean_block <- readr::read_tsv(
-    path_to_clean_block, 
-    col_names = TRUE, 
-    col_types=CLEAN_BLOCKS_COL_TYPES
-  )
-  return(clean_block)
-}
