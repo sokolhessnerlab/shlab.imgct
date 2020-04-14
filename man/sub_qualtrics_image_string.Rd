@@ -4,7 +4,7 @@
 \alias{sub_qualtrics_image_string}
 \title{Scrub qualtrics image string at end of name}
 \usage{
-sub_qualtrics_image_string(str)
+sub_qualtrics_image_string(str, qualtrics_tag = "_Q10")
 }
 \description{
 Scrub qualtrics image string at end of name

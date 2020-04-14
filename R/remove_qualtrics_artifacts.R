@@ -3,18 +3,20 @@
 #' \code{remove_qualtrics_artifacts} removes artifacts that are embedded in the raw data exports from Qualtrics.
 #'
 #' @param block A dataframe of a block of loaded raw data from qualtrics.
+#' @param qualtrics_tag A string literal matching the qualtrics tag that was assigned to naming by Qualtrics that
+#' should be removed for analysis. Defaults to "_Q10" for now.
 #'
 #' @return Return block as dataframe without qualtrics artifacts.
 #'
 #' @examples
 #'
 #' @export
-remove_qualtrics_artifacts <- function(block) {
+remove_qualtrics_artifacts <- function(block, qualtrics_tag = "_Q10") {
 
   .rows <- -c(1, 3)
   .cols <- c(
     grep("IP Address|IPAddress", block[1, ]), # IP Address tag find, either style
-    grep("Q", block[1, ]) # question tag find
+    grep(qualtrics_tag, block[1, ]) # question tag find
   )
 
   block <- block[
@@ -39,8 +41,8 @@ remove_qualtrics_artifacts <- function(block) {
 }
 
 #' Scrub qualtrics image string at end of name
-sub_qualtrics_image_string <- function(str) {
-  .pattern <- sprintf(".jpg - \\d+%s", QUALTRICS_EXPORT_TAG)
+sub_qualtrics_image_string <- function(str, qualtrics_tag = "_Q10") {
+  .pattern <- sprintf(".jpg - \\d+%s", qualtrics_tag)
   .replacement <- ""
-  gsub(.pattern,.replacement, str)
+  gsub(.pattern, .replacement, str)
 }

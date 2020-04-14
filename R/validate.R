@@ -37,8 +37,12 @@ validate <- function(path, threshold = 0, remove_below_threshold = FALSE) {
 
   for (fn in filenames) {
 
-    block <- shlab.imgct::load_block(file.path(path_clean, fn))
-    v_key_exp <- uncount(v_key, nrow(block))
+    block <- shlab.imgct::load_block(
+      file.path(path_clean, fn), 
+      block_template = "CLEAN"
+    )
+
+    v_key_exp <- tidyr::uncount(v_key, nrow(block))
     bool_block <- (block[v_keys_by_name] == v_key_exp)
 
     # NOTE: if remove_below_threshold = TRUE...need to do something else
@@ -47,9 +51,9 @@ validate <- function(path, threshold = 0, remove_below_threshold = FALSE) {
     # }
 
     block <- block %>% 
-              mutate(count_valid = rowSums(bool_block)) %>% 
-              select(-one_of(keys)) %>% # drop validation image columns
-              filter(count_valid >= threshold)
+              dplyr::mutate(count_valid = rowSums(bool_block)) %>% 
+              dplyr::select(-one_of(v_keys_by_name)) %>% # drop validation image columns
+              dplyr::filter(count_valid >= threshold)
 
     readr::write_tsv(
       block, 

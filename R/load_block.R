@@ -38,7 +38,7 @@ load_raw_block <- function(path) {
 #' @return clean_block
 load_clean_block <- function(path) {
 	block <- readr::read_tsv(
-    path_to_clean_block, 
+    path, 
     col_names = TRUE, 
     col_types = readr::cols(.default = readr::col_character())
   )

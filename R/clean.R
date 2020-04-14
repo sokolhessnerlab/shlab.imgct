@@ -41,7 +41,7 @@ clean <- function(path) {
       block,
       file = file.path(
         path_clean,
-        str_replace(fn, RAW_BLOCKS_DIR_NAME, CLEAN_BLOCKS_DIR_NAME)
+        stringr::str_replace(fn, "raw", "clean")
       ),
       sep = "\t",
       append = FALSE, # remove file if already exists and replace

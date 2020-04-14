@@ -19,9 +19,10 @@ Imports:
     ggplot2,
     purrr,
     tibble,
-    dplyr,
     stringr,
     forcats,
     janitor,
-    shlab.utils
+    shlab.utils,
+    magrittr,
+    dplyr
 RoxygenNote: 7.1.0
