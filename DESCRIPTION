@@ -12,7 +12,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.6)
+    R (>= 3.6),
+    dplyr
 Imports: 
     readr,
     tidyr,
@@ -23,6 +24,5 @@ Imports:
     forcats,
     janitor,
     shlab.utils,
-    magrittr,
-    dplyr
+    magrittr
 RoxygenNote: 7.1.0
