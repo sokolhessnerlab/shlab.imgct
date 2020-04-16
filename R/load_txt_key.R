@@ -3,7 +3,7 @@
 #' \code{load_txt_key} reads a list of key=value pairs in a txt file.
 #'
 #' @param path String path to file, which must be a relative path to the project root directory 
-#' @param key_template String literal that can equal "CATEGORY" or "VALIDATION".
+#' @param key_template String literal that can equal "CATEGORIZATION" or "VALIDATION".
 #' @param col_names Vector of column names for txt key. Defaults to c("key", "value").
 #' 
 #' @return A transposed key.
@@ -13,7 +13,7 @@
 #'
 #' @export
 load_txt_key <- function(path, 
-                         key_template = c("CATEGORY", "VALIDATION"), 
+                         key_template = c("CATEGORIZATION", "VALIDATION"), 
                          col_names = c("key", "value")) {
   
   key_template <- match.arg(key_template) # this could be useful later
