@@ -6,14 +6,14 @@
 \usage{
 load_txt_key(
   path,
-  key_template = c("CATEGORY", "VALIDATION"),
+  key_template = c("CATEGORIZATION", "VALIDATION"),
   col_names = c("key", "value")
 )
 }
 \arguments{
 \item{path}{String path to file, which must be a relative path to the project root directory}
 
-\item{key_template}{String literal that can equal "CATEGORY" or "VALIDATION".}
+\item{key_template}{String literal that can equal "CATEGORIZATION" or "VALIDATION".}
 
 \item{col_names}{Vector of column names for txt key. Defaults to c("key", "value").}
 }
