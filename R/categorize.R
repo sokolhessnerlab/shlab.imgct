@@ -13,8 +13,6 @@
 #' @export
 categorize <- function(path) {
 
-  # TODO: error if valid blocks or validation key do not exist
-  # TODO: error if threshold is out of bounds of validation key
   path_valid = file.path(path, "valid")
   path_categorized = file.path(path, "categorized")
   path_keys = file.path(path, "keys")
@@ -25,33 +23,54 @@ categorize <- function(path) {
   )
   c_keys_by_name = names(c_key)
 
-	# TODO: handle duplicates
-	#keys <- names(category_key) # to rename category column names with actual name
+  filenames <- list.files(
+    path = path_valid, 
+    pattern = "*.tsv",
+    full.names = FALSE # maintain full path/to/file string
+  )
 
-	# pivot_longer and group by image_id to count category_id choices per image
-	block <- block %>%
-		tidyr::pivot_longer(
-			cols = -c("ip_address", "count_valid"), 
-			names_to = "image_id", 
-			values_to = "category_id", 
-			values_drop_na = TRUE # ...maybe
-		) %>%
-		group_by(image_id) %>%
-		count(category_id)
+  df_list <- list()
+  index <- 1
 
-	# pivot_wider to organize count of each category_id choice by image_id
-	block <- block %>% 
-		tidyr::pivot_wider(
-			id_cols = image_id, 
-			names_from = category_id, 
-			values_from = n, 
-			values_fill = list(n = 0)
-		)
+  for (fn in filenames) {
 
-	#? rename columns of counted categories to actual category names
-	#category_names = unlist(category_key, use.names = FALSE)
-	#names(categorized_block)[names(category_key)] = category_names
+  	block <- shlab.imgct::load_block(
+  		file.path(path_valid, fn),
+  		block_template = "VALID"
+  	)
 
-	return(block)
+		# pivot_longer and group by image_id to count category_id choices per image
+		block <- block %>%
+			tidyr::pivot_longer(
+				cols = -c("ip_address", "count_valid"), 
+				names_to = "image_id", 
+				values_to = "category_id", 
+				values_drop_na = TRUE # ...maybe
+			) %>%
+			group_by(image_id) %>%
+			count(category_id)
+
+		# pivot_wider to organize count of each category_id choice by image_id
+		block <- block %>% 
+			tidyr::pivot_wider(
+				id_cols = image_id, 
+				names_from = category_id, 
+				values_from = n, 
+				values_fill = list(n = 0)
+			)
+
+		df_list[[index]] <- block
+		index <- index + 1
+
+		#? rename columns of counted categories to actual category names
+		#category_names = unlist(category_key, use.names = FALSE)
+		#names(categorized_block)[names(category_key)] = category_names
+
+	}
+
+	# Now bind rows of df_list
+	df_bind <- dplyr::bind_rows(df_list)
+
+	return(df_bind)
 
 }
