@@ -13,8 +13,6 @@
 #' @export
 categorize <- function(path) {
 
-  # TODO: error if valid blocks or validation key do not exist
-  # TODO: error if threshold is out of bounds of validation key
   path_valid = file.path(path, "valid")
   path_categorized = file.path(path, "categorized")
   path_keys = file.path(path, "keys")
@@ -49,8 +47,8 @@ categorize <- function(path) {
 				values_to = "category_id", 
 				values_drop_na = FALSE # ...maybe
 			) %>%
-			dplyr::group_by(image_id) %>%
-			dplyr::count(category_id)
+			group_by(image_id) %>%
+			count(category_id)
 
 		# pivot_wider to organize count of each category_id choice by image_id
 		block <- block %>% 
