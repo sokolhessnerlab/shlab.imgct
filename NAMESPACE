@@ -3,5 +3,6 @@
 export(clean)
 export(load_block)
 export(load_txt_key)
+export(parse_qualtrics_export)
 export(remove_qualtrics_artifacts)
 export(validate)
