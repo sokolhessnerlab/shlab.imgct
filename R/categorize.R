@@ -47,8 +47,8 @@ categorize <- function(path) {
 				values_to = "category_id", 
 				values_drop_na = FALSE # ...maybe
 			) %>%
-			group_by(image_id) %>%
-			count(category_id)
+			dplyr::group_by(image_id) %>%
+			dplyr::count(category_id)
 
 		# pivot_wider to organize count of each category_id choice by image_id
 		block <- block %>% 
