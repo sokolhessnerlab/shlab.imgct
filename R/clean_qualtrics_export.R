@@ -9,7 +9,8 @@
 #' @param qualtrics_tag A string literal matching the qualtrics tag that was assigned to naming by Qualtrics that
 #' should be removed for analysis. Defaults to "_Q10" for now.
 #'
-#' @return Returns message of success.
+#' @return Returns parsed data frame established prior to looping and
+#' writing individualized response files.
 #'
 #' @examples
 #' clean_qualtrics_export(path, export_name)
@@ -19,8 +20,7 @@ clean_qualtrics_export <- function(path,
                                    export_name = "qualtrics_export", 
                                    qualtrics_tag = "_Q10") {
 
-  path_to_export <- file.path(path, "raw")
-  exported_df <- load_export(path_to_export, export_name)
+  exported_df <- load_export(path, export_name)
   parsed_df <- parse_export(exported_df, qualtrics_tag)
 
   path_to_blocks <- file.path(path, "blocks")
@@ -35,26 +35,27 @@ clean_qualtrics_export <- function(path,
     block_id <- stringr::str_extract(block, "\\d+")
     images <- readr::read_lines(file.path(path_to_blocks, block))
 
-    block_df <- parsed_df %>%
+    block_df <- exported_df %>%
       tibble::rownames_to_column("participantCode") %>%
-      dplyr::filter(imageBlock == block_id) %>% # cannot make imageBlock in quotes?
+      dplyr::filter("imageBlock" == block_id) %>%
       dplyr::select(-c("imageBlock")) %>%
       `names<-`(c("participantCode", images))
 
     readr::write_tsv(
       block_df, 
       file.path(
-        path, 
-        "clean",
+        path_to_raw, 
         stringr::str_c("clean_", block_id, ".tsv")
       ),
       na = "NA",
       append = FALSE,
       col_names = TRUE
     )
+
   }
 
-  return("Successful cleaning")
+  return(exported_df)
+
 }
 
 ### load_export(export_path, export_name)

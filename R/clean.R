@@ -1,54 +1,28 @@
 #' Clean Function
 #'
-#' \code{clean} scrubs a sequenctial list of Qualtrics data export files
-#' detailing participant category responses to images within a directory of
-#' image blocks.
+#' \code{clean} scrubs a list of raw response data consisting of participant
+#' codes and images with category choices, where each list item is a TSV file
+#' within a directory named "raw". The cleaned data is written to a new "clean"
+#' directory with TSV files.
 #'
 #' @param path The path relative to working directory that holds data in
-#' designated "raw" directory.
+#' designated "raw" directory, as well as the "clean" directory for written
+#' data files.
+#' @param export_name The file name prefix for the raw data export from a given
+#' source. Defaults to "qualtrics_export".
+#' @param source_type The source from which the raw data was exported from.
+#' Defaults to "qualtrics".
 #'
 #' @examples
-#' clean("../mounts/imgct/data/5_category")
+#' clean("../mounts/imgct/data/csn_imgct")
 #'
 #' @export
-clean <- function(path) {
-  
-  path_raw = file.path(path, "raw")
-  path_clean = file.path(path, "clean")
-  
-  filenames <- list.files(
-    path = path_raw, 
-    pattern = "*.tsv",
-    full.names = FALSE
-  )
-
-  .lower <- 0
-  .upper <- 0
-  for (fn in filenames) {
-    print(fn)
-    
-    block <- shlab.imgct::load_block(file.path(path_raw, fn), "RAW")
-    block <- shlab.imgct::remove_qualtrics_artifacts(block)
-
-    # reset lower bound relative to previous upper bound, then
-    # reset upper bound to total rows extracted thus far
-    .lower <- .upper + 1
-    .upper <- nrow(block)
-
-    block <- dplyr::slice(block, .lower:.upper)
-    
-    write.table(
-      block,
-      file = file.path(
-        path_clean,
-        stringr::str_replace(fn, "raw", "clean")
-      ),
-      sep = "\t",
-      append = FALSE, # remove file if already exists and replace
-      col.names = TRUE,
-      row.names = FALSE # remove automated indices as row names
+clean <- function(path, export_name = "qualtrics_export", source_type = "qualtrics") {
+  if (source_type == "qualtrics") {
+    shlab.imgct::clean_qualtrics_export(
+      path,
+      export_name,
+      qualtrics_tag = "_Q10"
     )
-    
   }
-  
 }
