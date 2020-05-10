@@ -6,11 +6,10 @@
 #' @param export_name The name of the exported file from Qualtrics. Note: the
 #' file must be a TSV, and the export options must prepare values as numeric
 #' that were specially coded in the study.
-#' @param qualtrics_tag A string literal matching the qualtrics tag that was assigned to naming by Qualtrics that
-#' should be removed for analysis. Defaults to "_Q10" for now.
+#' @param qualtrics_tag A string literal matching the qualtrics tag that was
+#' assigned to naming by Qualtrics that should be removed for analysis. Defaults to "_Q10" for now.
 #'
-#' @return Returns parsed data frame established prior to looping and
-#' writing individualized response files.
+#' @return Returns success message.
 #'
 #' @examples
 #' clean_qualtrics_export(path, export_name)
@@ -21,7 +20,7 @@ clean_qualtrics_export <- function(path,
                                    qualtrics_tag = "_Q10") {
 
   path_to_raw <- file.path(path, "raw")
-  exported_df <- load_export(path, export_name)
+  exported_df <- load_export(path_to_raw, export_name)
   parsed_df <- parse_export(exported_df, qualtrics_tag)
 
   path_to_blocks <- file.path(path, "blocks")
@@ -45,7 +44,8 @@ clean_qualtrics_export <- function(path,
     readr::write_tsv(
       block_df, 
       file.path(
-        path_to_raw, 
+        path, 
+        "clean",
         stringr::str_c("clean_", block_id, ".tsv")
       ),
       na = "NA",
@@ -55,7 +55,7 @@ clean_qualtrics_export <- function(path,
 
   }
 
-  return(exported_df)
+  return("Successful cleaning")
 
 }
 
@@ -70,6 +70,7 @@ load_export <- function(path, name) {
     header = TRUE,
     stringsAsFactors = FALSE,
     fill = TRUE,
+    na = "NA",
     fileEncoding = "UTF-16LE"
   )
   return(exported_df)

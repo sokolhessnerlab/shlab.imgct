@@ -27,7 +27,7 @@ validate <- function(path, threshold = 0, remove_below_threshold = FALSE) {
     file.path(path_keys, "validation_key.txt"), 
     key_template = "VALIDATION"
   )
-  v_keys_by_name = names(v_key)
+  v_keys_by_name <- names(v_key)
 
   filenames <- list.files(
     path = path_clean, 

@@ -17,12 +17,11 @@ clean_qualtrics_export(
 file must be a TSV, and the export options must prepare values as numeric
 that were specially coded in the study.}
 
-\item{qualtrics_tag}{A string literal matching the qualtrics tag that was assigned to naming by Qualtrics that
-should be removed for analysis. Defaults to "_Q10" for now.}
+\item{qualtrics_tag}{A string literal matching the qualtrics tag that was
+assigned to naming by Qualtrics that should be removed for analysis. Defaults to "_Q10" for now.}
 }
 \value{
-Returns parsed data frame established prior to looping and
-writing individualized response files.
+Returns success message.
 }
 \description{
 \code{clean_qualtrics_export} removes artifacts that are embedded in the raw data exports from Qualtrics.
