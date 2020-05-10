@@ -13,6 +13,8 @@
 #' @export
 categorize <- function(path) {
 
+  # TODO: error if valid blocks or validation key do not exist
+  # TODO: error if threshold is out of bounds of validation key
   path_valid = file.path(path, "valid")
   path_categorized = file.path(path, "categorized")
   path_keys = file.path(path, "keys")
