@@ -20,6 +20,7 @@ clean_qualtrics_export <- function(path,
                                    export_name = "qualtrics_export", 
                                    qualtrics_tag = "_Q10") {
 
+  path_to_raw <- file.path(path, "raw")
   exported_df <- load_export(path, export_name)
   parsed_df <- parse_export(exported_df, qualtrics_tag)
 
@@ -35,9 +36,9 @@ clean_qualtrics_export <- function(path,
     block_id <- stringr::str_extract(block, "\\d+")
     images <- readr::read_lines(file.path(path_to_blocks, block))
 
-    block_df <- exported_df %>%
+    block_df <- parsed_df %>%
       tibble::rownames_to_column("participantCode") %>%
-      dplyr::filter("imageBlock" == block_id) %>%
+      dplyr::filter(imageBlock == block_id) %>%
       dplyr::select(-c("imageBlock")) %>%
       `names<-`(c("participantCode", images))
 
