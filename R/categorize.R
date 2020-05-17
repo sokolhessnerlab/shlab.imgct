@@ -53,6 +53,7 @@ categorize <- function(path) {
 			dplyr::count(category_id) %>%
       dplyr::mutate(category_id = replace(category_id, !(category_id %in% c_keys_by_code), NA))
 
+    print(block)
 		# pivot_wider to organize count of each category_id choice by image_id
 		block <- block %>% 
 			tidyr::pivot_wider(

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analyze.R
 \name{analyze}
 \alias{analyze}
-\title{Categorize Function}
+\title{Analyze Function}
 \usage{
 analyze(path)
 }
