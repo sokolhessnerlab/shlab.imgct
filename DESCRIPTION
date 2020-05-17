@@ -24,5 +24,6 @@ Imports:
     forcats,
     janitor,
     shlab.utils,
-    magrittr
+    magrittr,
+    naniar
 RoxygenNote: 7.1.0

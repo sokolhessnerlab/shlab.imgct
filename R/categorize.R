@@ -1,6 +1,6 @@
 #' Categorize Function
 #'
-#' \code{c} loads, pivots, and combines valid blocks
+#' \code{categorize} loads, pivots, and combines valid blocks
 #' of image categorization task responses, then associates
 #' participant response counts to categories for each
 #' image.
@@ -22,10 +22,8 @@ categorize <- function(path) {
     key_template = "CATEGORIZATION"
   )
   c_keys_by_code <- names(c_key)
-
-  #TODO: generalize the throwing out edge case values like "1,2" with a na_if
-  #statement or a replace statement somewhere, which only keeps the actual
-  #category numbers 1, 2, 3, 4, 5...but does this regardless of the task
+  c_keys_by_name <- c_key %>%
+    unlist(., use.names = FALSE)
 
   filenames <- list.files(
     path = path_to_valid, 
@@ -53,7 +51,7 @@ categorize <- function(path) {
 			) %>%
 			dplyr::group_by(image_id) %>%
 			dplyr::count(category_id) %>%
-      dplyr::mutate(category_id = dplyr::na_if(category_id, "1,2"))
+      dplyr::mutate(category_id = replace(category_id, !(category_id %in% c_keys_by_code), NA))
 
 		# pivot_wider to organize count of each category_id choice by image_id
 		block <- block %>% 
@@ -65,22 +63,17 @@ categorize <- function(path) {
 			) %>%
       dplyr::select(image_id, c_keys_by_code)
       
-		# add convenience column with block index
-    #
-		# block <- block %>%
-		#	  dplyr::mutate(block_index = index)
-
 		df_list[[index]] <- block
 		index <- index + 1
-
-		#? rename columns of counted categories to actual category names
-		#category_names = unlist(category_key, use.names = FALSE)
-		#names(categorized_block)[names(category_key)] = category_names
 
 	}
 
 	# Now bind rows of df_list
 	df_bind <- dplyr::bind_rows(df_list)
+
+  # Rename columns with textual key, expect image_id in first column
+  df_bind <- df_bind %>% 
+    dplyr::rename_at(vars(-c(1)), ~c_keys_by_name)
 
   readr::write_tsv(
     df_bind,

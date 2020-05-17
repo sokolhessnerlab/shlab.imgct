@@ -11,7 +11,7 @@ categorize(path)
 designated "valid" and "keys" directories.}
 }
 \description{
-\code{c} loads, pivots, and combines valid blocks
+\code{categorize} loads, pivots, and combines valid blocks
 of image categorization task responses, then associates
 participant response counts to categories for each
 image.
