@@ -13,9 +13,9 @@
 #' @export
 categorize <- function(path) {
 
-  path_to_valid = file.path(path, "valid")
-  path_to_categorized = file.path(path, "categorized")
-  path_to_keys = file.path(path, "keys")
+  path_to_valid <- file.path(path, "valid")
+  path_to_categorized <- file.path(path, "categorized")
+  path_to_keys <- file.path(path, "keys")
   
   c_key <- shlab.imgct::load_txt_key(
     file.path(path_to_keys, "categorization_key.txt"), 
