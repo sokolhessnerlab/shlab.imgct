@@ -4,11 +4,14 @@
 \alias{categorize}
 \title{Categorize Function}
 \usage{
-categorize(path)
+categorize(path, filename = "categorized.tsv")
 }
 \arguments{
 \item{path}{The path relative to working directory that holds data in
 designated "valid" and "keys" directories.}
+
+\item{filename}{The name of the output file that will be written after
+categorization is finished.}
 }
 \description{
 \code{categorize} loads, pivots, and combines valid blocks
