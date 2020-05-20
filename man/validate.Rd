@@ -22,6 +22,6 @@ below validation threshold are removed from output. Defaults to false.}
 against a validation key.
 }
 \examples{
-validate("../mounts/imgct/data/5_category")
+validate("../mounts/imgct/data/csn_imgct")
 
 }

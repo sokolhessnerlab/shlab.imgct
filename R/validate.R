@@ -12,7 +12,7 @@
 #' below validation threshold are removed from output. Defaults to false.
 #'
 #' @examples
-#' validate("../mounts/imgct/data/5_category")
+#' validate("../mounts/imgct/data/csn_imgct")
 #'
 #' @export
 validate <- function(path, threshold = 0, remove_below_threshold = FALSE) {
@@ -66,4 +66,61 @@ validate <- function(path, threshold = 0, remove_below_threshold = FALSE) {
     )
 
   }
+}
+
+#' Validate All Participant Responses In All Blocks
+#'
+#' \code{validate_all_participants}
+#'
+#' @param path String path
+#' @param validation_key Key dataframe
+#'
+#'
+#' @export
+validate_all_participants <- function(path, validation_key) {
+
+  filenames <- list.files(
+    path = file.path(path, "clean"), 
+    pattern = "*.tsv",
+    full.names = TRUE
+  )
+
+  purrr::map(filenames, shlab.imgct::load_clean_block())
+
+  readr::write_tsv(
+    all_participant_validations, 
+    file.path(
+      path, 
+      "all_participant_validations.tsv"
+    ), 
+    append = FALSE, 
+    col_names = TRUE
+  )
+
+  return(all_participant_validations)
+
+}
+
+#' Validate All Participant Responses In One Block
+#'
+#' \code{validate_block_participants}
+#'
+#' @param block A loaded dataframe of participant responses to a specified block of
+#' images. The dataframe must be scrubbed of Qualtrics or other artifacts prior
+#' to usage with this function.
+#' @param validation_key A loaded validation key.
+#'
+#' @return participant_validations The block is returned as a validation block
+#' consisting of only validation images and participant responses, plus a count
+#' of valid responses per participant.
+#'
+#' @examples
+#' validate_block_participants(clean_block_03, validation_key)
+#'
+#' @export
+validate_block_participants <- function(block, validation_key) {
+
+  participant_validations <- block %>%
+
+  return(participant_validations)
 }

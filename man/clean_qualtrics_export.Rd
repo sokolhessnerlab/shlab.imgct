@@ -6,27 +6,30 @@
 \usage{
 clean_qualtrics_export(
   path,
-  export_name = "qualtrics_export",
+  filename = "qualtrics_export.tsv",
   qualtrics_tag = "_Q10"
 )
 }
 \arguments{
 \item{path}{A path to data directories for project.}
 
-\item{export_name}{The name of the exported file from Qualtrics. Note: the
+\item{filename}{The name of the exported file from Qualtrics. Note: the
 file must be a TSV, and the export options must prepare values as numeric
 that were specially coded in the study.}
 
 \item{qualtrics_tag}{A string literal matching the qualtrics tag that was
-assigned to naming by Qualtrics that should be removed for analysis. Defaults to "_Q10" for now.}
+assigned to naming by Qualtrics that should be removed for analysis. Defaults 
+to "_Q10".}
 }
 \value{
-Returns success message.
+Success message with reference to the path cleaned blocks were saved
+to.
 }
 \description{
-\code{clean_qualtrics_export} removes artifacts that are embedded in the raw data exports from Qualtrics.
+\code{clean_qualtrics_export} removes artifacts that are 
+embedded in the raw data exports from Qualtrics.
 }
 \examples{
-clean_qualtrics_export(path, export_name)
+clean_qualtrics_export(path, filename)
 
 }

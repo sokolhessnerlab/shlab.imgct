@@ -1,27 +1,29 @@
 #' Parse Qualtrics export survey response data
 #' 
-#' \code{clean_qualtrics_export} removes artifacts that are embedded in the raw data exports from Qualtrics.
+#' \code{clean_qualtrics_export} removes artifacts that are 
+#' embedded in the raw data exports from Qualtrics.
 #'
 #' @param path A path to data directories for project.
-#' @param export_name The name of the exported file from Qualtrics. Note: the
+#' @param filename The name of the exported file from Qualtrics. Note: the
 #' file must be a TSV, and the export options must prepare values as numeric
 #' that were specially coded in the study.
 #' @param qualtrics_tag A string literal matching the qualtrics tag that was
-#' assigned to naming by Qualtrics that should be removed for analysis. Defaults to "_Q10" for now.
+#' assigned to naming by Qualtrics that should be removed for analysis. Defaults 
+#' to "_Q10".
 #'
-#' @return Returns success message.
+#' @return Success message with reference to the path cleaned blocks were saved
+#' to.
 #'
 #' @examples
-#' clean_qualtrics_export(path, export_name)
+#' clean_qualtrics_export(path, filename)
 #'
 #' @export
 clean_qualtrics_export <- function(path, 
-                                   export_name = "qualtrics_export", 
+                                   filename = "qualtrics_export.tsv", 
                                    qualtrics_tag = "_Q10") {
 
-  path_to_raw <- file.path(path, "raw")
-  exported_df <- load_export(path_to_raw, export_name)
-  parsed_df <- parse_export(exported_df, qualtrics_tag)
+  qualtrics_export <- load_qualtrics_export(path, filename)
+  qualtrics_parsed <- parse_qualtrics_export(qualtrics_export, qualtrics_tag)
 
   path_to_blocks <- file.path(path, "blocks")
   blocks <- list.files(
@@ -35,14 +37,14 @@ clean_qualtrics_export <- function(path,
     block_id <- stringr::str_extract(block, "\\d+")
     images <- readr::read_lines(file.path(path_to_blocks, block))
 
-    block_df <- parsed_df %>%
+    clean_block <- qualtrics_parsed %>%
       tibble::rownames_to_column("participantCode") %>%
       dplyr::filter(imageBlock == block_id) %>%
       dplyr::select(-c("imageBlock")) %>%
       `names<-`(c("participantCode", images))
 
     readr::write_tsv(
-      block_df, 
+      clean_block, 
       file.path(
         path, 
         "clean",
@@ -55,33 +57,11 @@ clean_qualtrics_export <- function(path,
 
   }
 
-  return("Successful cleaning")
-
-}
-
-### load_export(export_path, export_name)
-load_export <- function(path, name) {
-  export_path <- file.path(
-    path,
-    stringr::str_c(name, ".tsv")
+  return(
+    paste(
+      "Success! Your clean blocks were saved to ", 
+      file.path(path, "clean")
+    )
   )
-  exported_df <- read.delim(
-    export_path,
-    header = TRUE,
-    stringsAsFactors = FALSE,
-    fill = TRUE,
-    na = "NA",
-    fileEncoding = "UTF-16LE"
-  )
-  return(exported_df)
-}
 
-### parse_export(exported_df)
-parse_export <- function(exported_df, qualtrics_tag = "_Q", drop_rows = c(2)) {
-  parsed_df <- exported_df %>% 
-    dplyr::filter(!row_number() %in% drop_rows) %>%
-    dplyr::filter(Finished == 1) %>%
-    dplyr::select(contains(qualtrics_tag), "imageBlock", "participantCode") %>%
-    tibble::column_to_rownames(var = "participantCode")
-  return(parsed_df)
 }

@@ -4,15 +4,15 @@
 \alias{clean}
 \title{Clean Function}
 \usage{
-clean(path, export_name = "qualtrics_export", source_type = "qualtrics")
+clean(path, filename = "qualtrics_export.tsv", source_type = "qualtrics")
 }
 \arguments{
 \item{path}{The path relative to working directory that holds data in
 designated "raw" directory, as well as the "clean" directory for written
 data files.}
 
-\item{export_name}{The file name prefix for the raw data export from a given
-source. Defaults to "qualtrics_export".}
+\item{filename}{The file name prefix for the raw data export from a given
+source, and must include file extension (TSV). Defaults to "qualtrics_export.tsv".}
 
 \item{source_type}{The source from which the raw data was exported from.
 Defaults to "qualtrics".}
