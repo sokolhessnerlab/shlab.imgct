@@ -32,6 +32,8 @@ clean_qualtrics_export <- function(path,
     full.names = FALSE
   )
 
+  # Each block of image names must be reapplied as column headers for 
+  # each corresponding set of participants and responses in sequence.
   for (block in blocks) {
 
     block_id <- stringr::str_extract(block, "\\d+")

@@ -19,11 +19,11 @@ analyze <- function(path) {
   df <- readr::read_tsv(path_to_categorized)
 
   df <- df %>%
-    mutate(
+    dplyr::mutate(
       htg_index = select(., -c(image_id)) %>%
-        pmap_dbl(~calculate_htg_index(c(...)))
-    ) %>%
-    arrange(desc(htg_index))
+        purrr::pmap_dbl(~calculate_htg_index(c(...)))
+      ) %>%
+      dplyr::arrange(desc(htg_index))
     
 
   return(df)
