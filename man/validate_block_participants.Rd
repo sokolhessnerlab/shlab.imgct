@@ -19,7 +19,11 @@ consisting of only validation images and participant responses, plus a count
 of valid responses per participant.
 }
 \description{
-\code{validate_block_participants}
+\code{validate_block_participants} assesses the validation image responses
+by participants in a given clean image block. The validations are made
+relative to a validation key, and the function returns a dataframe of
+validation responses and total number of validations correctly made by
+participant.
 }
 \examples{
 validate_block_participants(clean_block_03, validation_key)

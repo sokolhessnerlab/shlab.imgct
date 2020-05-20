@@ -4,14 +4,25 @@
 \alias{categorize}
 \title{Categorize Function}
 \usage{
-categorize(path, filename = "categorized.tsv")
+categorize(path, key_filename = "categorization_key.txt", threshold = 0)
 }
 \arguments{
 \item{path}{The path relative to working directory that holds data in
 designated "valid" and "keys" directories.}
 
-\item{filename}{The name of the output file that will be written after
-categorization is finished.}
+\item{key_filename}{Name of the categorization key TXT file with extension.
+Defaults to "categorization_key.txt".}
+
+\item{threshold}{The minimum number of correct validations participants must have
+made to have their responses considered for categorization. Defaults to 0.}
+}
+\value{
+A categorized dataframe of images for a given validation
+threshold. The dataframe is saved to file with a reference to valdiation
+threshold, such that the output filename takes the form
+"categorized_X_valid.tsv", where X is the minimum number of validations
+expected correct for the task.
+'
 }
 \description{
 \code{categorize} loads, pivots, and combines valid blocks
@@ -20,5 +31,6 @@ participant response counts to categories for each
 image.
 }
 \examples{
+categorize("path/to/data", threshold = 3)
 
 }

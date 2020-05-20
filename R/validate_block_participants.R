@@ -1,6 +1,10 @@
 #' Validate All Participant Responses In One Block
 #'
-#' \code{validate_block_participants}
+#' \code{validate_block_participants} assesses the validation image responses
+#' by participants in a given clean image block. The validations are made
+#' relative to a validation key, and the function returns a dataframe of
+#' validation responses and total number of validations correctly made by
+#' participant.
 #'
 #' @param clean_block A loaded dataframe of participant responses 
 #' to a specified block of images. The dataframe must be 
@@ -22,6 +26,8 @@ validate_block_participants <- function(clean_block, validation_key) {
   key_names <- names(validation_key)
   boolean_matches <- (clean_block[key_names] == expanded_key)
 
+  # Evaluate number of correct validation responses by each participant and
+  # aggregate into a total_valid column
   participant_validations <- clean_block %>%
     dplyr::select(participantCode, one_of(key_names)) %>%
     dplyr::mutate(total_valid = rowSums(boolean_matches))

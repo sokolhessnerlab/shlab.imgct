@@ -7,7 +7,8 @@
 validate_all_participants(path, key_filename = "validation_key.txt")
 }
 \arguments{
-\item{path}{String path}
+\item{path}{String path to the directory containing clean block responses,
+keys and output for validated participant data.}
 
 \item{key_filename}{Name of the validation key TXT file with extension.
 Defaults to "validation_key.txt".}
@@ -18,7 +19,7 @@ validation responses, as well as a count of valid responses.
 }
 \description{
 \code{validate_all_participants} validates a sequence of scrubbed (clean) blocks of 
-participant response data against a validation key.
+participant response data against a validation key. The
 }
 \examples{
 validate_all_participants("/path/to/data", "validation_key.txt")
