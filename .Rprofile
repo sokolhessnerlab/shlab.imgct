@@ -13,4 +13,5 @@ local({
 ## the devtools package
 if (interactive()) {
   suppressMessages(require(devtools))
+  suppressMessages(require(knitr))
 }
