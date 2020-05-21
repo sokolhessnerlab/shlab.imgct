@@ -1,8 +1,8 @@
----
-output: github_document
----
+<!-- space for pandocs in future -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
 
 # shlab.imgct
 
@@ -39,4 +39,5 @@ shlab.imgct::validate_all_participants(datapath)
 shlab.imgct::categorize(datapath, threshold = 3)
 
 shlab.imgct::analyze(datapath, "categorized_3_valid.tsv")
+
 ```
