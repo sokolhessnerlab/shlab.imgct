@@ -12,10 +12,10 @@
 #' @examples
 #'
 #' @export
-analyze <- function(path) {
+analyze <- function(path, filename = "categorized_0_valid.tsv") {
   
   # this goes to a singular TSV file, as opposed to a directory
-  path_to_categorized <- file.path(path, "categorized", "categorized.tsv")
+  path_to_categorized <- file.path(path, filename)
   df <- readr::read_tsv(path_to_categorized)
 
   df <- df %>%
@@ -24,7 +24,6 @@ analyze <- function(path) {
         purrr::pmap_dbl(~calculate_htg_index(c(...)))
       ) %>%
       dplyr::arrange(desc(htg_index))
-    
 
   return(df)
 

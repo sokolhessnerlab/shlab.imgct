@@ -1,3 +1,7 @@
+---
+output: github_document
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # shlab.imgct
@@ -5,7 +9,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of shlab.imgct is to ...
+The goal of ``shlab.imgct`` is to streamline the processing and analysis
+of participant category responses to blocks of images.
 
 ## Installation
 
@@ -19,7 +24,19 @@ devtools::install_github("sokolhessnerlab/shlab.imgct")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r example, eval=FALSE}
 library(shlab.imgct)
-## basic example code
+
+# Set your path to relevant task data
+datapath <- "path/to/data"
+
+# shlab.imgct::clean(datapath) # can be used as convenience
+shlab.imgct::clean_qualtrics_export(datapath)
+
+shlab.imgct::validate_all_participants(datapath)
+
+shlab.imgct::categorize(datapath, threshold = 3)
+
+shlab.imgct::analyze(datapath, "categorized_3_valid.tsv")
+
 ```

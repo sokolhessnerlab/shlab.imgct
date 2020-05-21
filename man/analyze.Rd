@@ -4,7 +4,7 @@
 \alias{analyze}
 \title{Analyze Function}
 \usage{
-analyze(path)
+analyze(path, filename = "categorized_0_valid.tsv")
 }
 \arguments{
 \item{path}{The path relative to working directory that holds data in
