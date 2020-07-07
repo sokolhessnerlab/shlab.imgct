@@ -55,14 +55,15 @@ categorize <- function(path,
 
     categorization_list[[index]] <- count_category_responses(block_above_threshold, key_ids)
 
-		index <- index + 1
+    index <- index + 1
 
 	}
 
 	# Now bind by rows and rename columns with key, 
-  # expect image_id in first column
+  # with image_id in first column and then ungroup to flatten
 	categorized <- dplyr::bind_rows(categorization_list) %>%
-    dplyr::rename_at(vars(-c(1)), ~key_names)
+    dplyr::rename_at(vars(-c(1)), ~key_names) %>%
+    dplyr::ungroup()
 
   output_filename <- stringr::str_c(
     "categorized_",
