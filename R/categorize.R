@@ -65,6 +65,17 @@ categorize <- function(path,
     dplyr::rename_at(vars(-c(1)), ~key_names) %>%
     dplyr::ungroup()
 
+  # Mutate to include number of ratings n_ratings as a total
+  # across categories. Consider it the total ratings per image
+  # for the given validation threshold
+  categorized <- categorized %>%
+    dplyr::mutate(
+      n_ratings = purrr::reduce(
+        dplyr::select(., -image_id), # select category columns to sum across
+        `+`
+      )
+    )
+
   output_filename <- stringr::str_c(
     "categorized_",
     threshold,
