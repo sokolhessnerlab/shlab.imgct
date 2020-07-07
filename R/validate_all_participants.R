@@ -42,6 +42,7 @@ validate_all_participants <- function(path, key_filename = "validation_key.txt")
     all_participant_validations, 
     file.path(
       path, 
+      "results",
       "all_participant_validations.tsv"
     ), 
     append = FALSE, 

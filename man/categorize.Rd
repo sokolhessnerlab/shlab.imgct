@@ -22,7 +22,6 @@ threshold. The dataframe is saved to file with a reference to valdiation
 threshold, such that the output filename takes the form
 "categorized_X_valid.tsv", where X is the minimum number of validations
 expected correct for the task.
-'
 }
 \description{
 \code{categorize} loads, pivots, and combines valid blocks

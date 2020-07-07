@@ -16,7 +16,8 @@ participants and all validation responses with a total number of correct
 validations.
 }
 \description{
-\code{load_all_participant_validations} loads a clean block at a specified full path to the
+\code{load_all_participant_validations} loads the TSV at specified full path to the
+the "results" subdirectory of the desired data path.
 }
 \examples{
 load_all_participant_validations(path)

@@ -17,7 +17,7 @@
 #' threshold, such that the output filename takes the form
 #' "categorized_X_valid.tsv", where X is the minimum number of validations
 #' expected correct for the task.
-#''
+#'
 #' @examples
 #' categorize("path/to/data", threshold = 3)
 #'
@@ -34,7 +34,7 @@ categorize <- function(path,
   all_clean_blocks <- shlab.imgct::load_all_clean_blocks(path)
   all_participant_validations <- shlab.imgct::load_all_participant_validations(path)
   validation_cols <- names(
-    all_participant_validations %>% dplyr::select(-c("participantCode"))
+    all_participant_validations %>% dplyr::select(-c("participantCode")) 
   )
 
   categorization_list <- list()
@@ -72,7 +72,7 @@ categorize <- function(path,
 
   readr::write_tsv(
     categorized,
-    file.path(path, output_filename),
+    file.path(path, "results", output_filename),
     append = FALSE,
     col_names = TRUE
   )
