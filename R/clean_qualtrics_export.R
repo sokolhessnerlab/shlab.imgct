@@ -1,6 +1,6 @@
 #' Parse Qualtrics export survey response data
 #' 
-#' \code{clean_qualtrics_export} removes artifacts that are 
+#' \code{clean_qualtrics_tsv} removes artifacts that are 
 #' embedded in the raw data exports from Qualtrics.
 #'
 #' @param path A path to data directories for project.
@@ -19,10 +19,10 @@
 #'
 #' @export
 clean_qualtrics_export <- function(path, 
-                                   filename = "qualtrics_export.tsv", 
+                                   filename = "qualtrics.tsv", 
                                    qualtrics_tag = "_Q10") {
 
-  qualtrics_export <- load_qualtrics_export(path, filename)
+  qualtrics_export <- load_qualtrics_tsv(path, filename)
   qualtrics_parsed <- parse_qualtrics_export(qualtrics_export, qualtrics_tag)
 
   path_to_blocks <- file.path(path, "blocks")

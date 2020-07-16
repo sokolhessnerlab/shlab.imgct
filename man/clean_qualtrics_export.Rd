@@ -6,7 +6,7 @@
 \usage{
 clean_qualtrics_export(
   path,
-  filename = "qualtrics_export.tsv",
+  filename = "qualtrics.tsv",
   qualtrics_tag = "_Q10"
 )
 }
@@ -26,7 +26,7 @@ Success message with reference to the path cleaned blocks were saved
 to.
 }
 \description{
-\code{clean_qualtrics_export} removes artifacts that are 
+\code{clean_qualtrics_tsv} removes artifacts that are 
 embedded in the raw data exports from Qualtrics.
 }
 \examples{

@@ -15,16 +15,24 @@
 #'
 #' @examples
 #' clean("../mounts/imgct/data/csn_imgct")
+#' clean("../data", filename = "qualtrics.tsv", source_type = "qualtrics")
 #'
 #' @export
 clean <- function(path, 
-                  filename = "qualtrics_export.tsv", 
+                  filename = "qualtrics.tsv", 
                   source_type = "qualtrics") {
-  if (source_type == "qualtrics") {
+
+  is_tsv <- stringr::str_ends(filename, ".tsv")
+  is_accepted <- is_tsv & (source_type == "qualtrics")
+
+  if (is_accepted) {
     shlab.imgct::clean_qualtrics_export(
       path,
       filename,
       qualtrics_tag = "_Q10"
     )
+  } else {
+    print("Unfortunately, this function only equipped to handle 
+          TSV data exported from Qualtrics.")
   }
 }

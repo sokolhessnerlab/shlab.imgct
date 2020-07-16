@@ -4,7 +4,7 @@
 \alias{clean}
 \title{Clean Function}
 \usage{
-clean(path, filename = "qualtrics_export.tsv", source_type = "qualtrics")
+clean(path, filename = "qualtrics.tsv", source_type = "qualtrics")
 }
 \arguments{
 \item{path}{The path relative to working directory that holds data in
@@ -25,5 +25,6 @@ directory with TSV files.
 }
 \examples{
 clean("../mounts/imgct/data/csn_imgct")
+clean("../data", filename = "qualtrics.tsv", source_type = "qualtrics")
 
 }
