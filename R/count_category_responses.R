@@ -20,7 +20,7 @@ count_category_responses <- function(block, category_ids) {
   # pivot_longer and group by image_id to count category_id choices per image
   long_block <- block %>%
     tidyr::pivot_longer(
-      cols = -c("participantCode"), 
+      cols = -c("participant_id"), 
       names_to = "image_id", 
       values_to = "category_id", 
       values_drop_na = FALSE

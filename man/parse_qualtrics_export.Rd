@@ -17,6 +17,10 @@ parse_qualtrics_export(
 for parsing. Defaults to "_Q10".}
 
 \item{drop_rows}{A vector of row numbers to drop. Defaults to `c(2)`.}
+
+\item{remove_participant_code}{A boolean to remove the MTurk-created
+participantCode. Useful if wanting to obfuscate participants. Defaults to
+TRUE, but change to FALSE if needing to reference raw codes in analysis.}
 }
 \value{
 parsed_qualtrics_export A dataframe of the parsed qualtrics export
@@ -26,6 +30,6 @@ data, meaning no artifacts are left behind.
 \code{parse_qualtrics_export}
 }
 \examples{
-parse_qualtrics_export(qualtrics_export)
+parse_qualtrics_export(qualtrics_export, remove_participant_code = True)
 
 }

@@ -2,12 +2,13 @@
 % Please edit documentation in R/clean_qualtrics_export.R
 \name{clean_qualtrics_export}
 \alias{clean_qualtrics_export}
-\title{Parse Qualtrics export survey response data}
+\title{Clean Qualtrics Response Data}
 \usage{
 clean_qualtrics_export(
   path,
   filename = "qualtrics.tsv",
-  qualtrics_tag = "_Q10"
+  qualtrics_tag = "_Q10",
+  remove_participant_code = TRUE
 )
 }
 \arguments{
@@ -20,6 +21,10 @@ that were specially coded in the study.}
 \item{qualtrics_tag}{A string literal matching the qualtrics tag that was
 assigned to naming by Qualtrics that should be removed for analysis. Defaults 
 to "_Q10".}
+
+\item{remove_participant_code}{A boolean to remove the MTurk-created
+participantCode. Useful if wanting to obfuscate participants. Defaults to
+TRUE, but change to FALSE if needing to reference raw codes in analysis.}
 }
 \value{
 Success message with reference to the path cleaned blocks were saved

@@ -29,7 +29,7 @@ validate_block_participants <- function(clean_block, validation_key) {
   # Evaluate number of correct validation responses by each participant and
   # aggregate into a total_valid column
   participant_validations <- clean_block %>%
-    dplyr::select(participantCode, one_of(key_names)) %>%
+    dplyr::select(participant_id, one_of(key_names)) %>%
     dplyr::mutate(total_valid = rowSums(boolean_matches))
 
   return(participant_validations)

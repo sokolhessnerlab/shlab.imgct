@@ -21,7 +21,9 @@ Defaults to "qualtrics".}
 \code{clean} scrubs a list of raw response data consisting of participant
 codes and images with category choices, where each list item is a TSV file
 within a directory named "raw". The cleaned data is written to a new "clean"
-directory with TSV files.
+directory with TSV files. Note that if you need finer control over the
+cleaning of a given type of data export (i.e., Qualtrics), you should use that 
+data export type's dedicated underlying method.
 }
 \examples{
 clean("../mounts/imgct/data/csn_imgct")

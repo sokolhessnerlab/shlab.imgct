@@ -34,7 +34,7 @@ categorize <- function(path,
   all_clean_blocks <- shlab.imgct::load_all_clean_blocks(path)
   all_participant_validations <- shlab.imgct::load_all_participant_validations(path)
   validation_cols <- names(
-    all_participant_validations %>% dplyr::select(-c("participantCode")) 
+    all_participant_validations %>% dplyr::select(-c("participant_id")) 
   )
 
   categorization_list <- list()
@@ -46,9 +46,9 @@ categorize <- function(path,
       dplyr::left_join(
         select(
           all_participant_validations, 
-          c("participantCode", "total_valid")
+          c("participant_id", "total_valid")
         ), 
-        by = "participantCode"
+        by = "participant_id"
       ) %>% 
       dplyr::filter(total_valid >= threshold) %>%
       dplyr::select(-validation_cols)
