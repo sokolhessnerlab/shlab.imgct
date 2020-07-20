@@ -7,7 +7,8 @@
 parse_qualtrics_export(
   qualtrics_export,
   qualtrics_tag = "_Q10",
-  drop_rows = c(2)
+  drop_rows = c(2),
+  remove_participant_code = TRUE
 )
 }
 \arguments{
@@ -30,6 +31,6 @@ data, meaning no artifacts are left behind.
 \code{parse_qualtrics_export}
 }
 \examples{
-parse_qualtrics_export(qualtrics_export, remove_participant_code = True)
+parse_qualtrics_export(qualtrics_export, remove_participant_code = TRUE)
 
 }

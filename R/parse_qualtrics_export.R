@@ -14,20 +14,28 @@
 #' data, meaning no artifacts are left behind.
 #'
 #' @examples
-#' parse_qualtrics_export(qualtrics_export, remove_participant_code = True)
+#' parse_qualtrics_export(qualtrics_export, remove_participant_code = TRUE)
 #'
 #' @export
 parse_qualtrics_export <- function(qualtrics_export, 
                                    qualtrics_tag = "_Q10", 
-                                   drop_rows = c(2)) {
+                                   drop_rows = c(2),
+                                   remove_participant_code = TRUE) {
   parsed_qualtrics_export <- qualtrics_export %>% 
     dplyr::filter(!row_number() %in% drop_rows) %>%
     dplyr::filter(Finished == 1) %>%
     dplyr::select(contains(qualtrics_tag), "imageBlock", "participantCode") %>%
     tibble::column_to_rownames(var = "participantCode") %>%
+    tibble::rownames_to_column(var = "participantCode") %>%
     dplyr::mutate(
       participant_id = stringr::str_c("ICT_", stringr::str_pad(row_number(), 3, pad = "0"))
     ) %>%
     dplyr::relocate(participant_id, imageBlock)
+
+  if (remove_participant_code) {
+    parsed_qualtrics_export <- parsed_qualtrics_export %>%
+      dplyr::select(-participantCode)
+  }
+
   return(parsed_qualtrics_export)
 }
