@@ -24,7 +24,7 @@ make_image_list_from_dirs <- function(path, list_name = "img_list") {
       img_list <- c(img_list, fn)
     }
   }
-  write.table(file.path(path, img_list, paste0(list_name, ".txt")), 
+  write.table(img_list, file.path(path, paste0(list_name, ".txt")), 
                 row.names = FALSE, col.names = FALSE, quote = FALSE)
   return(img_list)
 }
