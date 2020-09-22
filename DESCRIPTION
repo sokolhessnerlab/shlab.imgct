@@ -1,6 +1,6 @@
 Package: shlab.imgct
 Title: Sokol-Hessner Lab image categorization task for R.
-Version: 0.5.3
+Version: 0.5.4
 Authors@R: as.person(c( 
 		"Ari Dyckovsky <ari.dyckovsky@du.edu> [aut, cre]",
 		"Peter Sokol-Hessneer <peter.sokol-hessner@du.edu> [aut]"
