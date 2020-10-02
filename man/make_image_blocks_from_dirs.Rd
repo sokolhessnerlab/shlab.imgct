@@ -4,7 +4,13 @@
 \alias{make_image_blocks_from_dirs}
 \title{Make Image Blocks From Dirs Function}
 \usage{
-make_image_blocks_from_dirs(dbs_path, validation_path, output_path, block_size)
+make_image_blocks_from_dirs(
+  dbs_path,
+  validation_path,
+  output_path,
+  block_size,
+  breaks = 0
+)
 }
 \arguments{
 \item{dbs_path}{The path relative to working directory of database lists of
@@ -17,6 +23,10 @@ image files.}
 TXT files.}
 
 \item{block_size}{The number of images per block.}
+
+\item{breaks}{The number of breaks that should be inserted with image name
+"break.jpg". Breaks will be inserted evenly throughout a block after the block
+is created. Defaults to 0.}
 }
 \value{
 List of image file names with prefix database identifiers.

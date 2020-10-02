@@ -12,6 +12,9 @@
 #' @param output_path The path relative to working directory of output block
 #' TXT files.
 #' @param block_size The number of images per block.
+#' @param breaks The number of breaks that should be inserted with image name
+#' "break.jpg". Breaks will be inserted evenly throughout a block after the block
+#' is created. Defaults to 0.
 #' 
 #' @return List of image file names with prefix database identifiers.
 #'
@@ -22,7 +25,11 @@
 #'  300)
 #'
 #' @export
-make_image_blocks_from_dirs <- function(dbs_path, validation_path, output_path, block_size) {
+make_image_blocks_from_dirs <- function(dbs_path, 
+                                        validation_path, 
+                                        output_path,
+                                        block_size,
+                                        breaks = 0) {
 
   # list names of contents in directory paths
   db_list <- list.files(dbs_path)
@@ -71,9 +78,17 @@ make_image_blocks_from_dirs <- function(dbs_path, validation_path, output_path, 
     # append and randomize placement of validation images
     block_list <- sample(unlist(append(samp, valid_list)))
 
+    # if breaks, insert them
+    if (breaks > 0) {
+      break_indices <- 1:breaks * (length(block_list) / (breaks + 1))
+      for (i in break_indices) {
+        block_list <- append(block_list, "break.jpg", after = i)
+      }
+    }
+
     # write the list to TXT file with associated block number
     write.table(block_list, 
-                file.path(output_path, stringr::str_c("block_", stringr::str_pad(block, 1, pad = "0"), ".txt")), 
+                file.path(output_path, stringr::str_c("block_", stringr::str_pad(block, 2, pad = "0"), ".txt")), 
                 row.names = FALSE, col.names = FALSE, quote = FALSE)
 
   }
